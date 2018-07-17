@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>istio流量管理(三) | 郑菲菲_fei | 郑菲菲_fei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="service Mesh">
+    <meta name="description" content="Istio 流量管理Istio 提供了强大的流量管理功能，如智能路由、服务发现与负载均衡、故障恢复、故障注入等。                                                                                                          流量管理的功能由 Pilot 配合 Envoy 负责，并接管进入和离开容器的">
+<meta name="keywords" content="service Mesh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="istio流量管理(三)">
+<meta property="og:url" content="https://www.zhengyuyan.com/201807/17/istio-traffic/index.html">
+<meta property="og:site_name" content="郑菲菲_fei">
+<meta property="og:description" content="Istio 流量管理Istio 提供了强大的流量管理功能，如智能路由、服务发现与负载均衡、故障恢复、故障注入等。                                                                                                          流量管理的功能由 Pilot 配合 Envoy 负责，并接管进入和离开容器的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/istio-traffic-manage.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/istio-request-flow.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/istio-service-discovery.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/istio-service-versions.png">
+<meta property="og:updated_time" content="2018-07-17T13:58:29.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="istio流量管理(三)">
+<meta name="twitter:description" content="Istio 流量管理Istio 提供了强大的流量管理功能，如智能路由、服务发现与负载均衡、故障恢复、故障注入等。                                                                                                          流量管理的功能由 Pilot 配合 Envoy 负责，并接管进入和离开容器的">
+<meta name="twitter:image" content="https://www.zhengyuyan.com/img/istio-traffic-manage.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="郑菲菲_fei" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">郑玉燕</h5>
+          <a href="mailto:314186096@qq.com" title="314186096@qq.com" class="mail">314186096@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YealZoy" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/coderzyy" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">istio流量管理(三)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">istio流量管理(三)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-17T13:43:40.000Z" itemprop="datePublished" class="page-time">
+  2018-07-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/DevOps/">DevOps</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Istio-流量管理"><span class="post-toc-number">1.</span> <span class="post-toc-text">Istio 流量管理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#API-版本"><span class="post-toc-number">2.</span> <span class="post-toc-text">API 版本</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#服务发现和负载均衡"><span class="post-toc-number">3.</span> <span class="post-toc-text">服务发现和负载均衡</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#流量接管原理"><span class="post-toc-number">4.</span> <span class="post-toc-text">流量接管原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#故障恢复"><span class="post-toc-number">5.</span> <span class="post-toc-text">故障恢复</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#故障注入"><span class="post-toc-number">6.</span> <span class="post-toc-text">故障注入</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#金丝雀部署"><span class="post-toc-number">7.</span> <span class="post-toc-text">金丝雀部署</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Istio-Ingress"><span class="post-toc-number">8.</span> <span class="post-toc-text">Istio Ingress</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Egress-流量"><span class="post-toc-number">9.</span> <span class="post-toc-text">Egress 流量</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#流量镜像"><span class="post-toc-number">10.</span> <span class="post-toc-text">流量镜像</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文档"><span class="post-toc-number">11.</span> <span class="post-toc-text">参考文档</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-istio-traffic"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">istio流量管理(三)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-17 21:43:40" datetime="2018-07-17T13:43:40.000Z"  itemprop="datePublished">2018-07-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/DevOps/">DevOps</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Istio-流量管理"><a href="#Istio-流量管理" class="headerlink" title="Istio 流量管理"></a>Istio 流量管理</h1><p>Istio 提供了强大的流量管理功能，如智能路由、服务发现与负载均衡、故障恢复、故障注入等。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/istio-traffic-manage.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>流量管理的功能由 Pilot 配合 Envoy 负责，并接管进入和离开容器的所有流量：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/istio-request-flow.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="API-版本"><a href="#API-版本" class="headerlink" title="API 版本"></a>API 版本</h1><p>Istio 0.7.X 及以前版本仅支持 config.istio.io/v1alpha2，0.8.0 将其升级为 networking.istio.io/v1alpha3，并且重命名了流量管理的几个资源对象：</p>
+<ul>
+<li>RouteRule -&gt; VirtualService</li>
+<li>DestinationPolicy -&gt; DestinationRule</li>
+<li>EgressRule -&gt; ExternalService</li>
+<li>Ingress -&gt; Gateway</li>
+</ul>
+<h1 id="服务发现和负载均衡"><a href="#服务发现和负载均衡" class="headerlink" title="服务发现和负载均衡"></a>服务发现和负载均衡</h1><p>为了接管流量，Istio 假设所有容器在启动时自动将自己注册到 Istio 中（通过自动或手动给 Pod 注入 Envoy sidecar 容器）。Envoy 收到外部请求后，会对请求作负载均衡，并支持轮询、随机和加权最少请求等负载均衡算法。除此之外，Envoy 还会以熔断机制定期检查服务后端容器的健康状态，自动移除不健康的容器和加回恢复正常的容器。容器内也可以返回 HTTP 503 显示将自己从负载均衡中移除。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/istio-service-discovery.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="流量接管原理"><a href="#流量接管原理" class="headerlink" title="流量接管原理"></a>流量接管原理</h1><p>Envoy sidecar 使用 iptables 把进入 Pod 和从 Pod 发出的流量转发到 Envoy 进程监听的端口（即 15001 端口）上：<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Generated by iptables-save v1.6.0 on Fri Jun  8 07:37:33 2018</span></span><br><span class="line"><span class="meta">*mangle</span></span><br><span class="line"><span class="string">:PREROUTING</span> <span class="string">ACCEPT</span> <span class="string">[2883:1129969]</span></span><br><span class="line"><span class="string">:INPUT</span> <span class="string">ACCEPT</span> <span class="string">[2883:1129969]</span></span><br><span class="line"><span class="string">:FORWARD</span> <span class="string">ACCEPT</span> <span class="string">[0:0]</span></span><br><span class="line"><span class="string">:OUTPUT</span> <span class="string">ACCEPT</span> <span class="string">[58217:6662600]</span></span><br><span class="line"><span class="string">:POSTROUTING</span> <span class="string">ACCEPT</span> <span class="string">[58217:6662600]</span></span><br><span class="line"><span class="string">COMMIT</span></span><br><span class="line"><span class="comment"># Completed on Fri Jun  8 07:37:33 2018</span></span><br><span class="line"><span class="comment"># Generated by iptables-save v1.6.0 on Fri Jun  8 07:37:33 2018</span></span><br><span class="line"><span class="meta">*nat</span></span><br><span class="line"><span class="string">:PREROUTING</span> <span class="string">ACCEPT</span> <span class="string">[0:0]</span></span><br><span class="line"><span class="string">:INPUT</span> <span class="string">ACCEPT</span> <span class="string">[0:0]</span></span><br><span class="line"><span class="string">:OUTPUT</span> <span class="string">ACCEPT</span> <span class="string">[299:27815]</span></span><br><span class="line"><span class="string">:POSTROUTING</span> <span class="string">ACCEPT</span> <span class="string">[299:27815]</span></span><br><span class="line"><span class="string">:ISTIO_INBOUND</span> <span class="bullet">-</span> <span class="string">[0:0]</span></span><br><span class="line"><span class="string">:ISTIO_OUTPUT</span> <span class="bullet">-</span> <span class="string">[0:0]</span></span><br><span class="line"><span class="string">:ISTIO_REDIRECT</span> <span class="bullet">-</span> <span class="string">[0:0]</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">PREROUTING</span> <span class="bullet">-p</span> <span class="string">tcp</span> <span class="bullet">-j</span> <span class="string">ISTIO_INBOUND</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">OUTPUT</span> <span class="bullet">-p</span> <span class="string">tcp</span> <span class="bullet">-j</span> <span class="string">ISTIO_OUTPUT</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">ISTIO_INBOUND</span> <span class="bullet">-p</span> <span class="string">tcp</span> <span class="bullet">-m</span> <span class="string">tcp</span> <span class="bullet">--dport</span> <span class="number">9080</span> <span class="bullet">-j</span> <span class="string">ISTIO_REDIRECT</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">ISTIO_OUTPUT</span> <span class="string">!</span> <span class="bullet">-d</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">/32</span> <span class="bullet">-o</span> <span class="string">lo</span> <span class="bullet">-j</span> <span class="string">ISTIO_REDIRECT</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">ISTIO_OUTPUT</span> <span class="bullet">-m</span> <span class="string">owner</span> <span class="bullet">--uid-owner</span> <span class="number">1337</span> <span class="bullet">-j</span> <span class="string">RETURN</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">ISTIO_OUTPUT</span> <span class="bullet">-m</span> <span class="string">owner</span> <span class="bullet">--gid-owner</span> <span class="number">1337</span> <span class="bullet">-j</span> <span class="string">RETURN</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">ISTIO_OUTPUT</span> <span class="bullet">-d</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">/32</span> <span class="bullet">-j</span> <span class="string">RETURN</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">ISTIO_OUTPUT</span> <span class="bullet">-j</span> <span class="string">ISTIO_REDIRECT</span></span><br><span class="line"><span class="bullet">-</span><span class="string">A</span> <span class="string">ISTIO_REDIRECT</span> <span class="bullet">-p</span> <span class="string">tcp</span> <span class="bullet">-j</span> <span class="string">REDIRECT</span> <span class="bullet">--to-ports</span> <span class="number">15001</span></span><br><span class="line"><span class="string">COMMIT</span></span><br><span class="line"><span class="comment"># Completed on Fri Jun  8 07:37:33 2018</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="故障恢复"><a href="#故障恢复" class="headerlink" title="故障恢复"></a>故障恢复</h1><p>Istio 提供了一系列开箱即用的故障恢复功能，如</p>
+<ul>
+<li>超时处理</li>
+<li>重试处理，如限制最大重试时间以及可变重试间隔</li>
+<li>健康检查，如自动移除不健康的容器</li>
+<li>请求限制，如并发请求数和并发连接数</li>
+<li>熔断</li>
+</ul>
+<p>这些功能均可以使用 VirtualService 动态配置。比如以下为用户 jason 的请求返回 500 （而其他用户均可正常访问）：<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - match:</span></span><br><span class="line"><span class="attr">    - headers:</span></span><br><span class="line"><span class="attr">        cookie:</span></span><br><span class="line"><span class="attr">          regex:</span> <span class="string">"^(.*?;)?(user=jason)(;.*)?$"</span></span><br><span class="line"><span class="attr">    fault:</span></span><br><span class="line"><span class="attr">      abort:</span></span><br><span class="line"><span class="attr">        percent:</span> <span class="number">100</span></span><br><span class="line"><span class="attr">        httpStatus:</span> <span class="number">500</span></span><br><span class="line"><span class="attr">    route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br></pre></td></tr></table></figure></p>
+<p>熔断示例：<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DestinationRule</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">httpbin</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  host:</span> <span class="string">httpbin</span></span><br><span class="line"><span class="attr">  trafficPolicy:</span></span><br><span class="line"><span class="attr">    connectionPool:</span></span><br><span class="line"><span class="attr">      tcp:</span></span><br><span class="line"><span class="attr">        maxConnections:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">      http:</span></span><br><span class="line"><span class="attr">        http1MaxPendingRequests:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">        maxRequestsPerConnection:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">    outlierDetection:</span></span><br><span class="line"><span class="attr">      http:</span></span><br><span class="line"><span class="attr">        consecutiveErrors:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">        interval:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line"><span class="attr">        baseEjectionTime:</span> <span class="number">3</span><span class="string">m</span></span><br><span class="line"><span class="attr">        maxEjectionPercent:</span> <span class="number">100</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="故障注入"><a href="#故障注入" class="headerlink" title="故障注入"></a>故障注入</h1><p>Istio 支持为应用注入故障，以模拟实际生产中碰到的各种问题，包括</p>
+<ul>
+<li>注入延迟（模拟网络延迟和服务过载）</li>
+<li>注入失败（模拟应用失效）<br>这些故障均可以使用 VirtualService 动态配置。如以下配置 2 秒的延迟：<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - fault:</span></span><br><span class="line"><span class="attr">      delay:</span></span><br><span class="line"><span class="attr">        percent:</span> <span class="number">100</span></span><br><span class="line"><span class="attr">        fixedDelay:</span> <span class="number">2</span><span class="string">s</span></span><br><span class="line"><span class="attr">    route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="金丝雀部署"><a href="#金丝雀部署" class="headerlink" title="金丝雀部署"></a>金丝雀部署</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/istio-service-versions.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>首先部署 bookinfo，并配置默认路由为 v1 版本：<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">productpage</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">productpage</span></span><br><span class="line"><span class="attr">  gateways:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">bookinfo</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">productpage</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">details</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">details</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">details</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DestinationRule</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">productpage</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  host:</span> <span class="string">productpage</span></span><br><span class="line"><span class="attr">  subsets:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v1</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DestinationRule</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  host:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">  subsets:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v2</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v2</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v3</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v3</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DestinationRule</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  host:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">  subsets:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v2</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v2</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v2-mysql</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v2-mysql</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v2-mysql-vm</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v2-mysql-vm</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DestinationRule</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">details</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  host:</span> <span class="string">details</span></span><br><span class="line"><span class="attr">  subsets:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v2</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v2</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></p>
+<p>示例一：将 10% 请求发送到 v2 版本而其余 90% 发送到 v1 版本<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">      weight:</span> <span class="number">90</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v2</span></span><br><span class="line"><span class="attr">      weight:</span> <span class="number">10</span></span><br></pre></td></tr></table></figure></p>
+<p>示例二：将 jason 用户的请求全部发到 v2 版本<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - match:</span></span><br><span class="line"><span class="attr">    - headers:</span></span><br><span class="line"><span class="attr">        cookie:</span></span><br><span class="line"><span class="attr">          regex:</span> <span class="string">"^(.*?;)?(user=jason)(;.*)?$"</span></span><br><span class="line"><span class="attr">    route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v2</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br></pre></td></tr></table></figure></p>
+<p>示例三：全部切换到 v2 版本<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v2</span></span><br></pre></td></tr></table></figure></p>
+<p>示例四：限制并发访问<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DestinationRule</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  host:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">  subsets:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line"><span class="attr">      version:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">    trafficPolicy:</span></span><br><span class="line"><span class="attr">      connectionPool:</span></span><br><span class="line"><span class="attr">        tcp:</span></span><br><span class="line"><span class="attr">          maxConnections:</span> <span class="number">100</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Istio-Ingress"><a href="#Istio-Ingress" class="headerlink" title="Istio Ingress"></a>Istio Ingress</h1><p>Istio 在部署时会自动创建一个 Istio Gateway，用来控制 Ingress 访问。<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># prepare自动注入</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="bullet">-f</span> <span class="string">samples/httpbin/httpbin.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get ingress external IP (suppose load balancer service)</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">get</span> <span class="string">svc</span> <span class="string">istio-ingressgateway</span> <span class="bullet">-n</span> <span class="string">istio-system</span></span><br><span class="line"><span class="string">export</span> <span class="string">INGRESS_HOST=$(kubectl</span> <span class="bullet">-n</span> <span class="string">istio-system</span> <span class="string">get</span> <span class="string">service</span> <span class="string">istio-ingressgateway</span> <span class="bullet">-o</span> <span class="string">jsonpath='&#123;.status.loadBalancer.ingress[0].ip&#125;')</span></span><br><span class="line"><span class="string">export</span> <span class="string">INGRESS_PORT=$(kubectl</span> <span class="bullet">-n</span> <span class="string">istio-system</span> <span class="string">get</span> <span class="string">service</span> <span class="string">istio-ingressgateway</span> <span class="bullet">-o</span> <span class="string">jsonpath='&#123;.spec.ports[?(@.name=="http")].port&#125;')</span></span><br><span class="line"><span class="string">export</span> <span class="string">SECURE_INGRESS_PORT=$(kubectl</span> <span class="bullet">-n</span> <span class="string">istio-system</span> <span class="string">get</span> <span class="string">service</span> <span class="string">istio-ingressgateway</span> <span class="bullet">-o</span> <span class="string">jsonpath='&#123;.spec.ports[?(@.name=="https")].port&#125;')</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># create gateway</span></span><br><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">| istioctl create -f -</span></span><br><span class="line"><span class="string"></span><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Gateway</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">httpbin-gateway</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    istio:</span> <span class="string">ingressgateway</span> <span class="comment"># use Istio default gateway implementation</span></span><br><span class="line"><span class="attr">  servers:</span></span><br><span class="line"><span class="attr">  - port:</span></span><br><span class="line"><span class="attr">      number:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">      protocol:</span> <span class="string">HTTP</span></span><br><span class="line"><span class="attr">    hosts:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">"httpbin.example.com"</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># configure routes for the gateway</span></span><br><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">| istioctl create -f -</span></span><br><span class="line"><span class="string"></span><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">httpbin</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">"httpbin.example.com"</span></span><br><span class="line"><span class="attr">  gateways:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">httpbin-gateway</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - match:</span></span><br><span class="line"><span class="attr">    - uri:</span></span><br><span class="line"><span class="attr">        prefix:</span> <span class="string">/status</span></span><br><span class="line"><span class="attr">    - uri:</span></span><br><span class="line"><span class="attr">        prefix:</span> <span class="string">/delay</span></span><br><span class="line"><span class="attr">    route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        port:</span></span><br><span class="line"><span class="attr">          number:</span> <span class="number">8000</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">httpbin</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># validate 200</span></span><br><span class="line"><span class="string">curl</span> <span class="bullet">--resolve</span> <span class="string">httpbin.example.com:$INGRESS_PORT:$INGRESS_HOST</span> <span class="attr">-HHost:httpbin.example.com</span> <span class="bullet">-I</span> <span class="attr">http://httpbin.example.com:$INGRESS_PORT/status/200</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># invalidate 404</span></span><br><span class="line"><span class="string">curl</span> <span class="bullet">--resolve</span> <span class="string">httpbin.example.com:$INGRESS_PORT:$INGRESS_HOST</span> <span class="attr">-HHost:httpbin.example.com</span> <span class="bullet">-I</span> <span class="attr">http://httpbin.example.com:$INGRESS_PORT/headers</span></span><br></pre></td></tr></table></figure></p>
+<p>使用 TLS：<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成证书</span></span><br><span class="line"><span class="string">git</span> <span class="string">clone</span> <span class="attr">https://github.com/nicholasjackson/mtls-go-example</span></span><br><span class="line"></span><br><span class="line"><span class="string">cd</span> <span class="string">mtls-go-example</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#该命令将产生四个目录：1_root，2_intermediate，3_application和4_client与你将使用客户端和服务器证书。</span></span><br><span class="line"><span class="string">generate.sh</span> <span class="string">bookinfo.example.com</span> <span class="string">&lt;password&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># istio-ingressgateway-certs必须在istio-system命名空间中</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">create</span> <span class="bullet">-n</span> <span class="string">istio-system</span> <span class="string">secret</span> <span class="string">tls</span> <span class="string">istio-ingressgateway-certs</span> <span class="bullet">--key</span> <span class="number">3</span><span class="string">_application/private/httpbin.example.com.key.pem</span> <span class="bullet">--cert</span> <span class="number">3</span><span class="string">_application/certs/httpbin.example.com.cert.pem</span></span><br><span class="line"></span><br><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">| istioctl replace -f -</span></span><br><span class="line"><span class="string"></span><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Gateway</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">httpbin-gateway</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    istio:</span> <span class="string">ingressgateway</span> <span class="comment"># use istio default ingress gateway</span></span><br><span class="line"><span class="attr">  servers:</span></span><br><span class="line"><span class="attr">  - port:</span></span><br><span class="line"><span class="attr">      number:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">      protocol:</span> <span class="string">HTTP</span></span><br><span class="line"><span class="attr">    hosts:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">"httpbin.example.com"</span></span><br><span class="line"><span class="attr">  - port:</span></span><br><span class="line"><span class="attr">      number:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">https</span></span><br><span class="line"><span class="attr">      protocol:</span> <span class="string">HTTPS</span></span><br><span class="line"><span class="attr">    tls:</span></span><br><span class="line"><span class="attr">      mode:</span> <span class="string">SIMPLE</span></span><br><span class="line"><span class="attr">      serverCertificate:</span> <span class="string">/etc/istio/ingressgateway-certs/tls.crt</span></span><br><span class="line"><span class="attr">      privateKey:</span> <span class="string">/etc/istio/ingressgateway-certs/tls.key</span></span><br><span class="line"><span class="attr">    hosts:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">"httpbin.example.com"</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># validate 200</span></span><br><span class="line"><span class="string">curl</span> <span class="bullet">--resolve</span> <span class="string">httpbin.example.com:$SECURE_INGRESS_PORT:$INGRESS_HOST</span> <span class="attr">-HHost:httpbin.example.com</span> <span class="bullet">-I</span> <span class="bullet">-k</span> <span class="attr">https://httpbin.example.com:$SECURE_INGRESS_PORT/status/200</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Egress-流量"><a href="#Egress-流量" class="headerlink" title="Egress 流量"></a>Egress 流量</h1><p>默认情况下，Istio 接管了容器的内外网流量，从容器内部无法访问 Kubernetes 集群外的服务。可以通过 ServiceEntry 为需要的容器开放 Egress 访问，如<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">$</span> <span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">| istioctl create -f -</span></span><br><span class="line"><span class="string"></span><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ServiceEntry</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">httpbin-ext</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">httpbin.org</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - number:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">    protocol:</span> <span class="string">HTTP</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="string">$</span> <span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">| istioctl create -f -</span></span><br><span class="line"><span class="string"></span><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">httpbin-ext</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">httpbin.org</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - timeout:</span> <span class="number">3</span><span class="string">s</span></span><br><span class="line"><span class="attr">    route:</span></span><br><span class="line"><span class="attr">      - destination:</span></span><br><span class="line"><span class="attr">          host:</span> <span class="string">httpbin.org</span></span><br><span class="line"><span class="attr">        weight:</span> <span class="number">100</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是 ServiceEntry 仅支持 HTTP、TCP 和 HTTPS，对于其他协议需要通过 –includeIPRanges 的方式设置 IP 地址范围，如<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm template @install/kubernetes/helm/istio@ --name istio --namespace istio-system --set global.proxy.includeIPRanges="10.0.0.1/24" -x @templates/sidecar-injector-configmap.yaml@ | kubectl apply -f -</span><br></pre></td></tr></table></figure></p>
+<h1 id="流量镜像"><a href="#流量镜像" class="headerlink" title="流量镜像"></a>流量镜像</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">| istioctl replace -f -</span></span><br><span class="line"><span class="string"></span><span class="attr">apiVersion:</span> <span class="string">networking.istio.io/v1alpha3</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">VirtualService</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">httpbin</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  hosts:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">httpbin</span></span><br><span class="line"><span class="attr">  http:</span></span><br><span class="line"><span class="attr">  - route:</span></span><br><span class="line"><span class="attr">    - destination:</span></span><br><span class="line"><span class="attr">        host:</span> <span class="string">httpbin</span></span><br><span class="line"><span class="attr">        subset:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">      weight:</span> <span class="number">100</span></span><br><span class="line"><span class="attr">    mirror:</span></span><br><span class="line"><span class="attr">      host:</span> <span class="string">httpbin</span></span><br><span class="line"><span class="attr">      subset:</span> <span class="string">v2</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a href="https://istio.io/docs/tasks/traffic-management/" target="_blank" rel="noopener">istio官方文档</a><br><a href="https://kubernetes.feisky.xyz/zh/apps/istio-traffic-management.html" target="_blank" rel="noopener">istio流量管理</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-17T13:58:29.683Z" itemprop="dateUpdated">2018-07-17 21:58:29</time>
+</span><br>
+
+
+        
+        <a href="/201807/17/istio-traffic/" target="_blank" rel="external">https://www.zhengyuyan.com/201807/17/istio-traffic/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.zhengyuyan.com">
+            <img src="/img/avatar.jpg" alt="郑玉燕">
+            郑玉燕
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/service-Mesh/">service Mesh</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.zhengyuyan.com/201807/17/istio-traffic/&title=《istio流量管理(三)》 — 郑菲菲_fei&pic=https://www.zhengyuyan.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zhengyuyan.com/201807/17/istio-traffic/&title=《istio流量管理(三)》 — 郑菲菲_fei&source=郑菲菲_fei的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.zhengyuyan.com/201807/17/istio-traffic/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《istio流量管理(三)》 — 郑菲菲_fei&url=https://www.zhengyuyan.com/201807/17/istio-traffic/&via=https://www.zhengyuyan.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.zhengyuyan.com/201807/17/istio-traffic/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/201807/17/istio-aq/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">istio安全管理(四)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/201807/17/bookinfo/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">istio官方示例bookinfo</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "S3HLoEkJ1TFJVllqfhemwIga-gzGzoHsz",
+            appKey: "kJv3mIkUwGVWvnoRXGmUKL5I",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>郑玉燕 &copy; 2015 - 2018</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备16003165号-1</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.zhengyuyan.com/201807/17/istio-traffic/&title=《istio流量管理(三)》 — 郑菲菲_fei&pic=https://www.zhengyuyan.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zhengyuyan.com/201807/17/istio-traffic/&title=《istio流量管理(三)》 — 郑菲菲_fei&source=郑菲菲_fei的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.zhengyuyan.com/201807/17/istio-traffic/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《istio流量管理(三)》 — 郑菲菲_fei&url=https://www.zhengyuyan.com/201807/17/istio-traffic/&via=https://www.zhengyuyan.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.zhengyuyan.com/201807/17/istio-traffic/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aQU7EMAwF0Ln/pcsWCaZ82wHU5HWFMqLJ68KyHb9e8XN9er6uJL/ev/ndLosfDAyMxzKu2ydhVFfuqcnH+oaKgYFxACMJhff/9W4l+UD5vm/XMTAwMOJX5yH4no2BgYGxNuDmxeoklcTAwMDIE7i8xZaE7H+oxTEwMB7IyLvuf//3r9xvYGBgPIpxFZ9q2pcc6xo/GBgYezPyAJe0yVYVtNXzYGBgnMboFZBJi38yFpasYGBg7M3olbK9q4X82jJvw2FgYJzDWFBGtsYpFgdWDAyMTRnVl1aLz2SoopcmRrU4BgbGFozk0Hl2mQyT5VcI+aAYBgbGCYwebNTKD36dXI5iYGDsxMjL1FXpXRUZvRkDA2NTRrUpP7lVqLbSCqEZAwNja8bkYqBXAOfHHV0PYGBgbMRIWl15Ay55T55oFpJODAyMAxjV4Ylk+zyt7CWgGBgYZzJ6oTMJoPl6tYjFwMA4gTFJ5vJ70d8IwYWBMAwMjO0Y1bTsfsvqB+qdBAMD4zTGZLNeK20e0DEwMM5k9MYj8nBcvl/tFbEYGBhbMCYDFvlmvXGxAhsDA2NrxuRY1Q3yY/WGMzAwMPZmJEE2/xKFIYliwP0hoGNgYBzAyANfnthVV0ZJJwYGBkarJVctYkc5LAYGBkbrIrNXxCYnWZAaYmBgPJCRFLHJEZNBsd5lwLJ2GwYGxgMZ87yrOq6aN+YWX2piYGA8j/EB7ttLqVoJjzsAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
