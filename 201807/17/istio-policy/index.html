@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>istio策略管理(五) | 郑菲菲_fei | 郑菲菲_fei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="service Mesh,istio">
+    <meta name="description" content="Istio 策略管理Mixer 为应用程序和基础架构后端之间提供了一个通用的策略控制层，负责先决条件检查（如认证授权）、配额管理并从 Envoy 代理中收集遥测数据等。                                                                                                          Mixer 支持灵活">
+<meta name="keywords" content="service Mesh,istio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="istio策略管理(五)">
+<meta property="og:url" content="https://www.zhengyuyan.com/201807/17/istio-policy/index.html">
+<meta property="og:site_name" content="郑菲菲_fei">
+<meta property="og:description" content="Istio 策略管理Mixer 为应用程序和基础架构后端之间提供了一个通用的策略控制层，负责先决条件检查（如认证授权）、配额管理并从 Envoy 代理中收集遥测数据等。                                                                                                          Mixer 支持灵活">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/istio-mixer.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/201807/17/istio-policy/istio-adapters.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/istio-phase.png">
+<meta property="og:updated_time" content="2018-11-13T15:19:59.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="istio策略管理(五)">
+<meta name="twitter:description" content="Istio 策略管理Mixer 为应用程序和基础架构后端之间提供了一个通用的策略控制层，负责先决条件检查（如认证授权）、配额管理并从 Envoy 代理中收集遥测数据等。                                                                                                          Mixer 支持灵活">
+<meta name="twitter:image" content="https://www.zhengyuyan.com/img/istio-mixer.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="郑菲菲_fei" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">郑玉燕</h5>
+          <a href="mailto:314186096@qq.com" title="314186096@qq.com" class="mail">314186096@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YealZoy" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/coderzyy" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">istio策略管理(五)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">istio策略管理(五)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-17T13:51:44.000Z" itemprop="datePublished" class="page-time">
+  2018-07-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/service-Mesh/">service Mesh</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Istio-策略管理"><span class="post-toc-number">1.</span> <span class="post-toc-text">Istio 策略管理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#实现原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#流量限制示例"><span class="post-toc-number">3.</span> <span class="post-toc-text">流量限制示例</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文档"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考文档</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-istio-policy"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">istio策略管理(五)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-17 21:51:44" datetime="2018-07-17T13:51:44.000Z"  itemprop="datePublished">2018-07-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/service-Mesh/">service Mesh</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Istio-策略管理"><a href="#Istio-策略管理" class="headerlink" title="Istio 策略管理"></a>Istio 策略管理</h1><p>Mixer 为应用程序和基础架构后端之间提供了一个通用的策略控制层，负责先决条件检查（如认证授权）、配额管理并从 Envoy 代理中收集遥测数据等。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/istio-mixer.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>Mixer 支持灵活的插件模型（即 Adapters），支持 GCP、AWS、Prometheus、Heapster 等各种丰富功能的后端。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="istio-adapters.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><p>本质上，Mixer 是一个 属性 处理机，进入 Mixer 的请求带有一系列的属性，Mixer 按照不同的处理阶段处理：</p>
+<ul>
+<li>通过全局 Adapters 为请求引入新的属性</li>
+<li>通过解析（Resolution）识别要用于处理请求的配置资源</li>
+<li>处理属性，生成 Adapter 参数</li>
+<li>分发请求到各个 Adapters 后端处理<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/istio-phase.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+Adapters 后端以 Mixer 配置 的方式注册到 Istio 中，参考<a href="https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/kube/mixer-rule-ratings-ratelimit.yaml" target="_blank" rel="noopener">这里</a>查看示例配置</li>
+</ul>
+<h1 id="流量限制示例"><a href="#流量限制示例" class="headerlink" title="流量限制示例"></a>流量限制示例</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">"config.istio.io/v1alpha2"</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">memquota</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">handler</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">istio-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  quotas:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">requestcount.quota.istio-system</span></span><br><span class="line"><span class="attr">    maxAmount:</span> <span class="number">5000</span></span><br><span class="line"><span class="attr">    validDuration:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line">    <span class="comment"># The first matching override is applied.</span></span><br><span class="line">    <span class="comment"># A requestcount instance is checked against override dimensions.</span></span><br><span class="line"><span class="attr">    overrides:</span></span><br><span class="line">    <span class="comment"># The following override applies to 'ratings' when</span></span><br><span class="line">    <span class="comment"># the source is 'reviews'.</span></span><br><span class="line"><span class="attr">    - dimensions:</span></span><br><span class="line"><span class="attr">        destination:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">        source:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">      maxAmount:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">      validDuration:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line">    <span class="comment"># The following override applies to 'ratings' regardless</span></span><br><span class="line">    <span class="comment"># of the source.</span></span><br><span class="line"><span class="attr">    - dimensions:</span></span><br><span class="line"><span class="attr">        destination:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">      maxAmount:</span> <span class="number">100</span></span><br><span class="line"><span class="attr">      validDuration:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">"config.istio.io/v1alpha2"</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">quota</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">requestcount</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">istio-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  dimensions:</span></span><br><span class="line"><span class="attr">    source:</span> <span class="string">source.labels["app"]</span> <span class="string">| source.service | "unknown"</span></span><br><span class="line"><span class="string"></span><span class="attr">    sourceVersion:</span> <span class="string">source.labels["version"]</span> <span class="string">| "unknown"</span></span><br><span class="line"><span class="string"></span><span class="attr">    destination:</span> <span class="string">destination.labels["app"]</span> <span class="string">| destination.service | "unknown"</span></span><br><span class="line"><span class="string"></span><span class="attr">    destinationVersion:</span> <span class="string">destination.labels["version"]</span> <span class="string">| "unknown"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string"></span><span class="attr">apiVersion:</span> <span class="string">"config.istio.io/v1alpha2"</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">rule</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">quota</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">istio-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  actions:</span></span><br><span class="line"><span class="attr">  - handler:</span> <span class="string">handler.memquota</span></span><br><span class="line"><span class="attr">    instances:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">requestcount.quota</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">config.istio.io/v1alpha2</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">QuotaSpec</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">request-count</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">istio-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  rules:</span></span><br><span class="line"><span class="attr">  - quotas:</span></span><br><span class="line"><span class="attr">    - charge:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">      quota:</span> <span class="string">RequestCount</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">config.istio.io/v1alpha2</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">QuotaSpecBinding</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">request-count</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">istio-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  quotaSpecs:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">request-count</span></span><br><span class="line"><span class="attr">    namespace:</span> <span class="string">istio-system</span></span><br><span class="line"><span class="attr">  services:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">ratings</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">reviews</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">details</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">productpage</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a href="https://kubernetes.feisky.xyz/zh/apps/istio-policy.html" target="_blank" rel="noopener">istio策略管理</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-11-13T15:19:59.138Z" itemprop="dateUpdated">2018-11-13 23:19:59</time>
+</span><br>
+
+
+        
+        <a href="/201807/17/istio-policy/" target="_blank" rel="external">https://www.zhengyuyan.com/201807/17/istio-policy/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.zhengyuyan.com">
+            <img src="/img/avatar.jpg" alt="郑玉燕">
+            郑玉燕
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/istio/">istio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/service-Mesh/">service Mesh</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.zhengyuyan.com/201807/17/istio-policy/&title=《istio策略管理(五)》 — 郑菲菲_fei&pic=https://www.zhengyuyan.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zhengyuyan.com/201807/17/istio-policy/&title=《istio策略管理(五)》 — 郑菲菲_fei&source=郑菲菲_fei的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.zhengyuyan.com/201807/17/istio-policy/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《istio策略管理(五)》 — 郑菲菲_fei&url=https://www.zhengyuyan.com/201807/17/istio-policy/&via=https://www.zhengyuyan.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.zhengyuyan.com/201807/17/istio-policy/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/201807/17/istio-metrics/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">istio metrics(六)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/201807/17/istio-aq/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">istio安全管理(四)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "S3HLoEkJ1TFJVllqfhemwIga-gzGzoHsz",
+            appKey: "kJv3mIkUwGVWvnoRXGmUKL5I",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>郑玉燕 &copy; 2015 - 2018</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备16003165号-1</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.zhengyuyan.com/201807/17/istio-policy/&title=《istio策略管理(五)》 — 郑菲菲_fei&pic=https://www.zhengyuyan.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zhengyuyan.com/201807/17/istio-policy/&title=《istio策略管理(五)》 — 郑菲菲_fei&source=郑菲菲_fei的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.zhengyuyan.com/201807/17/istio-policy/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《istio策略管理(五)》 — 郑菲菲_fei&url=https://www.zhengyuyan.com/201807/17/istio-policy/&via=https://www.zhengyuyan.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.zhengyuyan.com/201807/17/istio-policy/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3au7KDMAxFUf7/p7ltiguzjwQF0naVScD2SuHRw8eBx/kzrn7lz189Q95qDRkyZHyWcd4O/sw972pO8hmtK0OGjAUMsgl+7vUPYr43GTJkyCBHJ5nn/sCVIUOGjDcYafB3H+rxGWTIkLGZQRbol+RIsPh6Li5DhowPMjqp6dufX+lvyJAh41OMMxz94lr6DdqVDBkyRjM6YV/tuOQt0jgMlSFDxgLGU0km3xa/FoaaEDJkyBjKSA/KWpGu1rbkf58MGTJmM9I0sgbgLQd+geNIz28ZMmR8nFFrDNRKaTwE5M/IkCFjD6MWnPHDsbat+NqHDBkyxjGeusL1VAhYK/bJkCFjG4OU1UgLM41DSfMSVQ1lyJAxjpEmsZ0N1ULJzk5kyJAxj8Gbi2mw+NRfE9cFZciQMY5RK9nzcI2kqbych45dGTJkjGCQJWsXuchbtXVlyJCxk8Ffjkv2oHmQprj/zCBDhozRjE4SW7v+Rf649NqHDBkyNjD41Yd+5yFtfAbNAxkyZCxj8FpdPylNS2zBgStDhoyhjE6hLV24du/jcocyZMgYyjjDkTYG4vCuk3/LkCFjKKN/WpNlakW62rsyZMiYykhbjJ0yXHqRIijtyZAhYwGjUwhLk+FO2PfYNQsZMmSMZqTluU4QGcSwMmTIkIGDufSbdIeovyFDhoyhDJLE1hJd3maozSlDhowNjE7cxQ/E9LJFbU4ZMmSMY/wBFB3k8ybBRxgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
