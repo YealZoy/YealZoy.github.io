@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>java | 郑菲菲_fei | 郑菲菲_fei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java基础">
+    <meta name="description" content="classpathjava中classpath配置的是class文件生成的地址，和运行java命令去找class文件的地址,一般不做配置 java数据类型基本类型：byte(1字节),short(2字节),int(4字节),long(8字节),float(4字节),double(8字节),char(2字节),boolean引用类型：class,接口,数组,枚举等 基本类型转换boolean不能转换">
+<meta name="keywords" content="java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java">
+<meta property="og:url" content="https://www.zhengyuyan.com/201812/17/java/index.html">
+<meta property="og:site_name" content="郑菲菲_fei">
+<meta property="og:description" content="classpathjava中classpath配置的是class文件生成的地址，和运行java命令去找class文件的地址,一般不做配置 java数据类型基本类型：byte(1字节),short(2字节),int(4字节),long(8字节),float(4字节),double(8字节),char(2字节),boolean引用类型：class,接口,数组,枚举等 基本类型转换boolean不能转换">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/java_memory.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/meth_memory.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/object_memory.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/static_memory.png">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/duotai_mempry.png">
+<meta property="og:updated_time" content="2018-12-17T17:40:40.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java">
+<meta name="twitter:description" content="classpathjava中classpath配置的是class文件生成的地址，和运行java命令去找class文件的地址,一般不做配置 java数据类型基本类型：byte(1字节),short(2字节),int(4字节),long(8字节),float(4字节),double(8字节),char(2字节),boolean引用类型：class,接口,数组,枚举等 基本类型转换boolean不能转换">
+<meta name="twitter:image" content="https://www.zhengyuyan.com/img/java_memory.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="郑菲菲_fei" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">郑玉燕</h5>
+          <a href="mailto:314186096@qq.com" title="314186096@qq.com" class="mail">314186096@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YealZoy" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/coderzyy" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">java</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">java</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-17T13:21:17.000Z" itemprop="datePublished" class="page-time">
+  2018-12-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java基础/">java基础</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#classpath"><span class="post-toc-number">1.</span> <span class="post-toc-text">classpath</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#java数据类型"><span class="post-toc-number">2.</span> <span class="post-toc-text">java数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本类型转换"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">基本类型转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#方法重载"><span class="post-toc-number">3.</span> <span class="post-toc-text">方法重载</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数组"><span class="post-toc-number">4.</span> <span class="post-toc-text">数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组初始化方式"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">数组初始化方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组常见错误"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">数组常见错误</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#java内存分配"><span class="post-toc-number">5.</span> <span class="post-toc-text">java内存分配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#堆内存特点"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">堆内存特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#栈内存特点"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">栈内存特点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#java对象内存图"><span class="post-toc-number">6.</span> <span class="post-toc-text">java对象内存图</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#成员变量和局部变量"><span class="post-toc-number">7.</span> <span class="post-toc-text">成员变量和局部变量</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#访问修饰符"><span class="post-toc-number">8.</span> <span class="post-toc-text">访问修饰符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#private"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">private</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#static"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">static</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#静态变量和成员变量"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">静态变量和成员变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#继承"><span class="post-toc-number">9.</span> <span class="post-toc-text">继承</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多态"><span class="post-toc-number">10.</span> <span class="post-toc-text">多态</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-java"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">java</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-17 21:21:17" datetime="2018-12-17T13:21:17.000Z"  itemprop="datePublished">2018-12-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java基础/">java基础</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h1><p><code>java</code>中<code>classpath</code>配置的是<code>class</code>文件生成的地址，和运行<code>java</code>命令去找class文件的地址,一般不做配置</p>
+<h1 id="java数据类型"><a href="#java数据类型" class="headerlink" title="java数据类型"></a>java数据类型</h1><p>基本类型：byte(1字节),short(2字节),int(4字节),long(8字节),float(4字节),double(8字节),char(2字节),boolean<br>引用类型：class,接口,数组,枚举等</p>
+<h2 id="基本类型转换"><a href="#基本类型转换" class="headerlink" title="基本类型转换"></a>基本类型转换</h2><p>boolean不能转换为其他数据类型<br>默认转换<br>byte,short,char-&gt;int-&gt;long-&gt;float-&gt;double<br>byte,short,chart之间不转换,他们参与运算首先转换为int<br>在定义long或者float类型变量时，加L或者F(整数默认是int，浮点数默认是double)<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">byte</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">byte</span> b = <span class="number">4</span>;</span><br><span class="line"><span class="comment">// a+b结果为int</span></span><br><span class="line"><span class="comment">//byte c = a + b;</span></span><br><span class="line"><span class="keyword">byte</span> c = (<span class="keyword">byte</span>) (a+b);</span><br><span class="line"></span><br><span class="line"><span class="keyword">float</span> f = <span class="number">3.14F</span>;</span><br><span class="line"><span class="keyword">long</span> l = <span class="number">10000000L</span>;</span><br></pre></td></tr></table></figure></p>
+<h1 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h1><p>在同一个类中，允许存在一个以上的同名方法，只要参数的个数或者参数类型不通即可。与返回值类型无关，只看方法名和参数列表</p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组初始化：数组必须初始化，然后才能使用，为数组的元素分配内存空间，并为每个数组元素赋值  </p>
+<h2 id="数组初始化方式"><a href="#数组初始化方式" class="headerlink" title="数组初始化方式"></a>数组初始化方式</h2><ul>
+<li>静态初始化：初始化只指定数组长度，由系统为数组分配初始值  <code>int[] a = new int[3]</code></li>
+<li>动态初始化：初始化时指定每个数组元素的初始值，由系统决定长度 <code>int[] a = new int[]{1,2,3}</code><h2 id="数组常见错误"><a href="#数组常见错误" class="headerlink" title="数组常见错误"></a>数组常见错误</h2></li>
+<li>不要同时进行静态和动态赋值</li>
+<li>数组越界</li>
+<li>空指针异常</li>
+</ul>
+<h1 id="java内存分配"><a href="#java内存分配" class="headerlink" title="java内存分配"></a>java内存分配</h1><ul>
+<li>栈 存放的是局部变量</li>
+<li>堆 存放的是所有new出来的对象</li>
+<li>方法区 (方法在栈里执行)</li>
+<li>本地方法(系统相关)</li>
+<li>寄存器(cpu)：不可控制</li>
+</ul>
+<h2 id="堆内存特点"><a href="#堆内存特点" class="headerlink" title="堆内存特点"></a>堆内存特点</h2><ul>
+<li>每一个new出来的对象都有一个地址值</li>
+<li>每个变量都有默认值<ul>
+<li>byte,short,int,long都为0</li>
+<li>float,double 为0.0</li>
+<li>char 为’\u0000’</li>
+<li>boolean 为false</li>
+<li>引用类型为null</li>
+</ul>
+</li>
+<li>使用完毕就变成垃圾，但并没有立即回收，会在垃圾回收器空闲时回收，这就是java占内存的原因</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/java_memory.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>  
+<h2 id="栈内存特点"><a href="#栈内存特点" class="headerlink" title="栈内存特点"></a>栈内存特点</h2><ul>
+<li>用完就释放</li>
+<li>栈内存的两个引用指向同一个堆内存空间，无论操作哪个，都针对同一个地方</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArgDemo</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">        change(a,b);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">        change(arr);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        a = b;</span><br><span class="line">        b = a + b;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">0</span> ; x &lt; arr.length;x++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">                arr[x] = arr[x] * <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/meth_memory.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h1 id="java对象内存图"><a href="#java对象内存图" class="headerlink" title="java对象内存图"></a>java对象内存图</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/object_memory.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h1 id="成员变量和局部变量"><a href="#成员变量和局部变量" class="headerlink" title="成员变量和局部变量"></a>成员变量和局部变量</h1><ul>
+<li>成员变量在类中</li>
+<li><p>局部变量在方法中定义或方法参数</p>
+</li>
+<li><p>成员变量在堆内存中</p>
+</li>
+<li><p>局部变量在栈内存中</p>
+</li>
+<li><p>成员变量随着对象的创建而创建，随着对象的消失而消失</p>
+</li>
+<li><p>局部变量随着方法的调用而存在，随着方法调用完毕而消失</p>
+</li>
+<li><p>有默认初始化值</p>
+</li>
+<li>没有默认初始化值，必须定义赋值后使用</li>
+</ul>
+<h1 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h1><h2 id="private"><a href="#private" class="headerlink" title="private"></a>private</h2><ul>
+<li>权限修饰符</li>
+<li>可以修饰成员(成员变量和成员方法)</li>
+<li>被private修饰的成员只能在本类中才能访问</li>
+</ul>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><ul>
+<li>可以修饰成员变量和成员方法</li>
+<li>随着类的加载而加载</li>
+<li>优先于对象存在</li>
+<li>被类的所有对象共享</li>
+<li>可以通过类名调用</li>
+<li>静态方法中没有<code>this</code>关键字</li>
+<li>静态方法只能访问静态成员变量和静态方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/static_memory.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<h2 id="静态变量和成员变量"><a href="#静态变量和成员变量" class="headerlink" title="静态变量和成员变量"></a>静态变量和成员变量</h2><ul>
+<li>静态变量属于类，所以也称类变量</li>
+<li><p>成员变量属于对象，所以称为实例变量(对象变量)</p>
+</li>
+<li><p>静态变量存储于方法的静态区</p>
+</li>
+<li><p>成员变量存储于堆内存</p>
+</li>
+<li><p>成员变量随着对象的创建而创建，随着对象的消失而消失</p>
+</li>
+<li><p>静态变量随着类的加载而加载，随着类的消失而消失</p>
+</li>
+<li><p>静态变量可以通过对象调用，也可以通过类名调用</p>
+</li>
+<li>成员变量只能通过对象名调用</li>
+</ul>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><ul>
+<li>低耦合 ：类与类之间的关系</li>
+<li>高内聚 ：独立完成一件事情的能力</li>
+<li>单继承</li>
+<li>子类只能继承父类所有非私有的成员(成员方法和成员变量)</li>
+<li>子类不能继承父类的构造方法，但是可以通过super关键字去访问父类构造方法</li>
+</ul>
+<ul>
+<li>在子类方法的局部范围找，有就使用</li>
+<li>在子类的成员范围找，有就使用</li>
+<li>在父类的成员范围找，有就使用</li>
+<li>如果找不到，报错</li>
+</ul>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><ul>
+<li>某一个事物，在不同时刻表现出不同状态</li>
+<li>多态<ul>
+<li>继承</li>
+<li>重写</li>
+<li>父类引用指向子类引用</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>成员变量 编译看左边，运行看左边</li>
+<li>构造方法 创建子类对象时，访问父类构造方法，对父类的数据进行初始化</li>
+<li>成员方法 编译看左边，运行看右边</li>
+<li><p>静态方法 编译看左边，运行看左边</p>
+</li>
+<li><p>向上转型 Fu f = new Zi();</p>
+</li>
+<li>向下转型 Zi z = (Zi) f;</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/duotai_mempry.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-17T17:40:40.166Z" itemprop="dateUpdated">2018-12-18 01:40:40</time>
+</span><br>
+
+
+        
+        <a href="/201812/17/java/" target="_blank" rel="external">https://www.zhengyuyan.com/201812/17/java/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.zhengyuyan.com">
+            <img src="/img/avatar.jpg" alt="郑玉燕">
+            郑玉燕
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.zhengyuyan.com/201812/17/java/&title=《java》 — 郑菲菲_fei&pic=https://www.zhengyuyan.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zhengyuyan.com/201812/17/java/&title=《java》 — 郑菲菲_fei&source=郑菲菲_fei的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.zhengyuyan.com/201812/17/java/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java》 — 郑菲菲_fei&url=https://www.zhengyuyan.com/201812/17/java/&via=https://www.zhengyuyan.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.zhengyuyan.com/201812/17/java/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/201812/17/hexohelp/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">hexohelp</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "S3HLoEkJ1TFJVllqfhemwIga-gzGzoHsz",
+            appKey: "kJv3mIkUwGVWvnoRXGmUKL5I",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>郑玉燕 &copy; 2015 - 2018</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备16003165号-1</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.zhengyuyan.com/201812/17/java/&title=《java》 — 郑菲菲_fei&pic=https://www.zhengyuyan.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zhengyuyan.com/201812/17/java/&title=《java》 — 郑菲菲_fei&source=郑菲菲_fei的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.zhengyuyan.com/201812/17/java/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java》 — 郑菲菲_fei&url=https://www.zhengyuyan.com/201812/17/java/&via=https://www.zhengyuyan.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.zhengyuyan.com/201812/17/java/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABw0lEQVR42u3aQY7CMAwF0N7/0ow0K6QZyreTmiK9rhAt6QsLy/nJccTX4/d6/vz8zd8n82eOKy5cXNxl7uP0WuG++u35mG8mjIuLO8jtFa9qUUvob2y4uLg34+Z3q5PHxcX9Xm5SkpIp4eLifgs3Aa0sXZJSuHmthouLu8DtBaZ7P1+e7+Li4m7alaiGp3mM0nw7Li7uCDdpPlYC0Op2S1TmcHFxR7h56clfmSxdVg5w4OLiXs1daWV6C6R8nH++wcXFHeHmWUT1x8mhjepdXFzcT3HzmOO89CRbKTkdFxd3krtCSaKNapzaDERwcXE3cZMFT36sqrqZWg1icHFxJ7m7Dk+Ut0ur7REuLu4gtzpEfqgi35pNxsTFxZ3k9qLS9YYmj2JxcXEnuUlrsjdU7S2icHFxJ7n5C3pNTK95wsXFvQO3d2wiD0QKuzrnElxc3EFuNehciU23HcDCxcW9jFstKL0Dl4VINL6Li4t7NbdXvKovS5ZMUZnDxcUd5ObFK2+VkgOg5WdwcXFvxi1shS7/ES+njYuLe0tuLxDphaq4uLif5eYD5RFGL2zdFovg4uIucHuBaVLOkiamNzFcXNzLuD9lEkP6ZPEeEgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
