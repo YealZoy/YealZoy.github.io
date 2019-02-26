@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>javaweb | 郑菲菲_fei | 郑菲菲_fei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="javaweb">
+    <meta name="description" content="tomcat解压目录 bin:可执行文件(startup.bat shutdown.bat) conf:配置文件(server.xml) lib:Tomcat依赖的jar文件 log:日志文件(记录出错等信息) temp:临时文件 webapps:可执行的项目(开发的项目，放入该目录) work:存放由jsp翻译成的java，以及编译成的class文件  配置tomcat tomcat依赖java">
+<meta name="keywords" content="javaweb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaweb">
+<meta property="og:url" content="https://www.zhengyuyan.com/201902/11/javaweb/index.html">
+<meta property="og:site_name" content="郑菲菲_fei">
+<meta property="og:description" content="tomcat解压目录 bin:可执行文件(startup.bat shutdown.bat) conf:配置文件(server.xml) lib:Tomcat依赖的jar文件 log:日志文件(记录出错等信息) temp:临时文件 webapps:可执行的项目(开发的项目，放入该目录) work:存放由jsp翻译成的java，以及编译成的class文件  配置tomcat tomcat依赖java">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.zhengyuyan.com/img/javaweb.png">
+<meta property="og:updated_time" content="2019-02-26T15:20:48.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javaweb">
+<meta name="twitter:description" content="tomcat解压目录 bin:可执行文件(startup.bat shutdown.bat) conf:配置文件(server.xml) lib:Tomcat依赖的jar文件 log:日志文件(记录出错等信息) temp:临时文件 webapps:可执行的项目(开发的项目，放入该目录) work:存放由jsp翻译成的java，以及编译成的class文件  配置tomcat tomcat依赖java">
+<meta name="twitter:image" content="https://www.zhengyuyan.com/img/javaweb.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="郑菲菲_fei" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">郑玉燕</h5>
+          <a href="mailto:314186096@qq.com" title="314186096@qq.com" class="mail">314186096@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YealZoy" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/coderzyy" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javaweb</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javaweb</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-11T11:18:58.000Z" itemprop="datePublished" class="page-time">
+  2019-02-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tomcat解压目录"><span class="post-toc-number">1.</span> <span class="post-toc-text">tomcat解压目录</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置tomcat"><span class="post-toc-number">2.</span> <span class="post-toc-text">配置tomcat</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#jsp执行流程"><span class="post-toc-number">3.</span> <span class="post-toc-text">jsp执行流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#jsp页面元素"><span class="post-toc-number">4.</span> <span class="post-toc-text">jsp页面元素</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#JDBC"><span class="post-toc-number">5.</span> <span class="post-toc-text">JDBC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库驱动"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">数据库驱动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PrepareStatement操作"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">PrepareStatement操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PrepareStatement与Statement区别"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">PrepareStatement与Statement区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数或存储过程"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">函数或存储过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#处理CLOB-text-BLOB类型"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">处理CLOB[text]/BLOB类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Serverlet"><span class="post-toc-number">6.</span> <span class="post-toc-text">Serverlet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#serverlet2-5"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">serverlet2.5</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#serverlet3-0"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">serverlet3.0</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#serverlet生命周期"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">serverlet生命周期</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#getinitParameter-String-name"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">getinitParameter(String name)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件上传"><span class="post-toc-number">7.</span> <span class="post-toc-text">文件上传</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#El表达式"><span class="post-toc-number">8.</span> <span class="post-toc-text">El表达式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#jstl"><span class="post-toc-number">9.</span> <span class="post-toc-text">jstl</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#过滤器"><span class="post-toc-number">10.</span> <span class="post-toc-text">过滤器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#监听器"><span class="post-toc-number">11.</span> <span class="post-toc-text">监听器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#脑图"><span class="post-toc-number">12.</span> <span class="post-toc-text">脑图</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-javaweb"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javaweb</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-11 19:18:58" datetime="2019-02-11T11:18:58.000Z"  itemprop="datePublished">2019-02-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="tomcat解压目录"><a href="#tomcat解压目录" class="headerlink" title="tomcat解压目录"></a>tomcat解压目录</h1><ul>
+<li>bin:可执行文件(startup.bat shutdown.bat)</li>
+<li>conf:配置文件(server.xml)</li>
+<li>lib:Tomcat依赖的jar文件</li>
+<li>log:日志文件(记录出错等信息)</li>
+<li>temp:临时文件</li>
+<li>webapps:可执行的项目(开发的项目，放入该目录)</li>
+<li>work:存放由jsp翻译成的java，以及编译成的class文件</li>
+</ul>
+<h1 id="配置tomcat"><a href="#配置tomcat" class="headerlink" title="配置tomcat"></a>配置tomcat</h1><ul>
+<li>tomcat依赖java,必须配置JAVA_HOME</li>
+<li>配置CATALINA_HOME(tomcat根目录)</li>
+<li>每个项目都有WEB-INF文件夹 (WEB_INF里有classes文件夹、lib文件夹、web.xml)</li>
+<li>配置虚拟路径 Host标签添加Context标签 <code>&lt;Context docBase=&quot;&quot; path=“”&gt;</code> (docBase实际路径 path 虚拟路径 )</li>
+<li>配置虚拟路径 也可在conf/Catalina/localhost 中新建”项目名.xml”中新增一行<code>&lt;Context docBase=&quot;&quot; path=“”&gt;</code></li>
+<li>虚拟主机 <host></host></li>
+</ul>
+<h1 id="jsp执行流程"><a href="#jsp执行流程" class="headerlink" title="jsp执行流程"></a>jsp执行流程</h1><p>第一次<br>jsp -&gt; java -&gt; class(生成的java和class在work/Catalina/localhost(Host)/项目名/org/apcahe/jsp文件夹里)<br>第二次<br>直接访问class文件</p>
+<h1 id="jsp页面元素"><a href="#jsp页面元素" class="headerlink" title="jsp页面元素"></a>jsp页面元素</h1><ul>
+<li><p>脚本Scriptlet</p>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%   </span><br><span class="line"></span><br><span class="line">      局部变量java语句</span><br><span class="line"> %&gt;</span><br><span class="line"> </span><br><span class="line"> &lt;%!</span><br><span class="line">  全局变量 </span><br><span class="line"> </span><br><span class="line"> %&gt;</span><br><span class="line"> <span class="comment">//输出表达式</span></span><br><span class="line"> &lt;%=%&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注释</p>
+</li>
+<li><p>指令</p>
+<ul>
+<li>page 网页开头指定页面属性<ul>
+<li>language</li>
+<li>import 导入类</li>
+<li>pageEncoding:jsp 文件自身编码</li>
+<li>contentType:浏览器解析jsp编码 </li>
+</ul>
+</li>
+<li>include</li>
+<li>taglib</li>
+</ul>
+</li>
+<li><p>jsp9大内置对象</p>
+<ul>
+<li>out: 向客户端输出</li>
+<li>pageContext: </li>
+<li>request：请求对象，存储客户端向服务端发送的请求信息<ul>
+<li>String request.getParameter(string name) 获取请求参数</li>
+<li>String[] request.getParameterValues(string name) 获取数组参数</li>
+<li>void request.setCharacterencoding(string code) 设置编码</li>
+<li>request.getServerletContext() 获取serverletcontext对象</li>
+<li>request.getRequestDispatcher(“yemian”).forward(request,response) 请求转发</li>
+<li>request.getcookies()</li>
+</ul>
+</li>
+<li>response： 相应对象<ul>
+<li>void response.addCookie(Cookie cookie) 服务端向客户端添加cookie</li>
+<li>void sendRedirect(String location) 重定向 页面跳转 重定向 数据丢失</li>
+<li>void setContenType(String type) 设置服务端相应编码</li>
+</ul>
+</li>
+<li>session: 会话 开始-&gt;关闭 是一次会话，客户端第一次请求服务端时，服务端会产生一个session对象，用于保存信息，并且每个session对象，都会有一个唯一的sessionId(用于区分其他session)，服务端也会生成一个cookie,并且该cookie的name=JESSSIONID，value=服务端sessionId，然后 服务端会在 相应客户端的同事 将该cookie发送给客户端，至此，客户端就有了一个cookie(JSESSIONID),因此，客户端的cookie就可以和服务端的session一一对应</li>
+<li>application: 全局对象<ul>
+<li>application.getContextpath() 获取虚拟路径</li>
+<li>application.getRealPath() 绝对路径（虚拟路径对应的绝对路径）</li>
+</ul>
+</li>
+<li>config</li>
+<li>page</li>
+<li>exception</li>
+</ul>
+</li>
+</ul>
+<h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><p>JDBC API:提供各种操作访问接口 Connection Statement PrepareStatament ResultSet</p>
+<ul>
+<li>DriverManager:连接</li>
+<li>Connection:连接</li>
+<li>Statement(PrepareStatament): 增删改查</li>
+<li>CallableStatement:调用函数或存储过程</li>
+<li>Result:返回结果</li>
+</ul>
+<h2 id="数据库驱动"><a href="#数据库驱动" class="headerlink" title="数据库驱动"></a>数据库驱动</h2><ul>
+<li>Oracle ojdbc-x.jar oracle.jdbc.OracleDriver</li>
+<li>Mysql mysql-connector-java-x.jar com.mysql.jdbc.Driver</li>
+<li>SqlServer sqljdbc-x.jar com.microsoft.sqlserver.jdbc.SQLServerDriver</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 导入驱动类</span></span><br><span class="line">Class.forName(<span class="string">"驱动类"</span>);</span><br><span class="line"><span class="comment">// 与数据库建立连接</span></span><br><span class="line">Connectio connection = DriverManager.getConnectioin(url,user,password);</span><br><span class="line"><span class="comment">// 执行sql</span></span><br><span class="line">Statement stmt = connection.createStatement();</span><br><span class="line"><span class="keyword">int</span> i = stmt.executeUpdate(<span class="string">"sql"</span>);<span class="comment">//返回值标识 增 删改 几条数据</span></span><br><span class="line">ResultSet rst = stmt.executeQuery(<span class="string">"sql"</span>); <span class="comment">// 查询</span></span><br><span class="line">stmt.close();</span><br><span class="line">connection.close();</span><br></pre></td></tr></table></figure>
+<h2 id="PrepareStatement操作"><a href="#PrepareStatement操作" class="headerlink" title="PrepareStatement操作"></a>PrepareStatement操作</h2><p>sql:”select * from xxx where id=?”<br>PrepareStatement.setString(1,”01”);<br>赋值操作setXXX(int index,XXX); 占位符</p>
+<h2 id="PrepareStatement与Statement区别"><a href="#PrepareStatement与Statement区别" class="headerlink" title="PrepareStatement与Statement区别"></a>PrepareStatement与Statement区别</h2><h2 id="函数或存储过程"><a href="#函数或存储过程" class="headerlink" title="函数或存储过程"></a>函数或存储过程</h2><p>参数格式：</p>
+<ul>
+<li>存储过程  无返回值 有Out参数代替 {call 存储过程名（参数列表）}</li>
+<li>存储函数 有返回值 {call 村塾函数名(参数列表)}<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 导入驱动类</span></span><br><span class="line">    Class.forName(<span class="string">"驱动类"</span>);</span><br><span class="line">    <span class="comment">// 与数据库建立连接</span></span><br><span class="line">    Connectio connection = DriverManager.getConnectioin(url,user,password);</span><br><span class="line">    CallableStatement csmt = connection.prepareCall(<span class="string">"&#123;call 存储过程名（参数列表）&#125;"</span>);</span><br><span class="line">    </span><br><span class="line">    csmt.execute()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="处理CLOB-text-BLOB类型"><a href="#处理CLOB-text-BLOB类型" class="headerlink" title="处理CLOB[text]/BLOB类型"></a>处理CLOB[text]/BLOB类型</h2><ul>
+<li>CLOB: 大文本数据</li>
+<li>BLOB: 二进制</li>
+<li>存放路径</li>
+</ul>
+<h1 id="Serverlet"><a href="#Serverlet" class="headerlink" title="Serverlet"></a>Serverlet</h1><h2 id="serverlet2-5"><a href="#serverlet2-5" class="headerlink" title="serverlet2.5"></a>serverlet2.5</h2><ul>
+<li>extend Httpservelet</li>
+<li>@Overide doGet(HttpRequest request,HttpResponse response)</li>
+<li>@Overide doPost(HttpRequest request,HttpResponse response)</li>
+<li>配置web.xml <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Serverlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">serverlet-name</span>&gt;</span>a<span class="tag">&lt;/<span class="name">serverlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">server-class</span>&gt;</span>com.xx.xxx<span class="tag">&lt;/<span class="name">serverlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Serverlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Serverlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">serverlet-name</span>&gt;</span>a<span class="tag">&lt;/<span class="name">serverlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">serverlet-url</span>&gt;</span>/xxx<span class="tag">&lt;/<span class="name">serverlet-url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Serverlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="serverlet3-0"><a href="#serverlet3-0" class="headerlink" title="serverlet3.0"></a>serverlet3.0</h2><ul>
+<li>extend Httpservelet</li>
+<li>@Overide doGet(HttpRequest request,HttpResponse response)</li>
+<li>@Overide doPost(HttpRequest request,HttpResponse response)</li>
+<li>在类上添加注解@WebServerlet(value=”/xxxx”)</li>
+</ul>
+<h2 id="serverlet生命周期"><a href="#serverlet生命周期" class="headerlink" title="serverlet生命周期"></a>serverlet生命周期</h2><ul>
+<li>加载（容器自动处理）</li>
+<li>初始化 init() 只运行一次</li>
+<li>服务（doget,dopost）</li>
+<li>销毁 destory() 关闭容器时运行，只运行一次</li>
+<li>卸载</li>
+</ul>
+<h2 id="getinitParameter-String-name"><a href="#getinitParameter-String-name" class="headerlink" title="getinitParameter(String name)"></a>getinitParameter(String name)</h2><ul>
+<li><p>serverlet (super.getinitParameter(“xxxxx”))</p>
+<ul>
+<li>3.0 @WebServerlet(value=”xxx”,initParams={@WebInitParam()})</li>
+<li>2.5<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Serverlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">serverlet-name</span>&gt;</span>a<span class="tag">&lt;/<span class="name">serverlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">server-class</span>&gt;</span>com.xx.xxx<span class="tag">&lt;/<span class="name">serverlet-class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>serverletparamname<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>value<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Serverlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Serverlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">serverlet-name</span>&gt;</span>a<span class="tag">&lt;/<span class="name">serverlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">serverlet-url</span>&gt;</span>/xxx<span class="tag">&lt;/<span class="name">serverlet-url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Serverlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>容器的值 （super.getServerletContenttext().getinitParameter(name=”xxxx”,value=”xxxx”)）</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>globalamname<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>globalvalue<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><ul>
+<li>commons-fifleupload.jar</li>
+<li>commons-io.jar</li>
+</ul>
+<h1 id="El表达式"><a href="#El表达式" class="headerlink" title="El表达式"></a>El表达式</h1><p>EL存取变量数据的方法很简单，例如：${username}。它的意思是取出某一范围中名称为username的变量。因为我们并没有指定哪一个范围的username，所以它会依序从Page、Request、Session、Application范围查找。</p>
+<ul>
+<li>Page -&gt;  PageScope</li>
+<li>Request -&gt;   RequestScope</li>
+<li>Session   -&gt;  SessionScope</li>
+<li>Application -&gt;  ApplicationScope</li>
+</ul>
+<h1 id="jstl"><a href="#jstl" class="headerlink" title="jstl"></a>jstl</h1><ul>
+<li>引入两个jar包 jstl.jar,standard.jar</li>
+<li>引入taglib &lt;%@ taglib uri=””,prefix=”c”%&gt;</li>
+<li>通用标签库<ul>
+<li>&lt;c:set var=””, value=””, scope=””&gt; 给某个变量赋值(scope:request,session,application) 相当于request.setAttribute()</li>
+<li>&lt;c:out&gt;</li>
+</ul>
+</li>
+<li>条件标签库<ul>
+<li>&lt;c:if test=”” var=”result”&gt; result是结果 true false</li>
+<li>&lt;c:choose&gt;&lt;c:when test=””&gt;&lt;/c:when&gt;&lt;c:otherwise&gt;&lt;/c:otherwise&gt;&lt;/c:choose&gt;</li>
+</ul>
+</li>
+<li>迭代标签库<ul>
+<li>&lt;c:forEach begin=”” end=”” step=”” varStatus=”status”&gt;${status.index}&lt;/c:forEach&gt;</li>
+<li>&lt;c:forEach var=”students” items=”student”&gt;&lt;/c:forEach&gt;</li>
+</ul>
+</li>
+</ul>
+<h1 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h1><ul>
+<li>implements Filter(javax.serverlet.Filter)</li>
+<li>重写init(),doFilter(),destory() <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">system.out.print(<span class="string">"请求拦截"</span>);</span><br><span class="line">chain.dofilter(request,response)</span><br><span class="line">system.out.print(<span class="string">"响应拦截"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>配置web.xml<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h1><ul>
+<li>implements ServerletRequestListener,HttpSessionLister,SeverletContextListener</li>
+<li>implements ServerletRequestAttributeListener, HttpSessionAttributeListener,SeverletContextAttributeListener 监听属性更改</li>
+<li>重写(监听开始结束)</li>
+<li>配置web.xml<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>xxxxx<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="脑图"><a href="#脑图" class="headerlink" title="脑图"></a>脑图</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/javaweb.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-02-26T15:20:48.321Z" itemprop="dateUpdated">2019-02-26 23:20:48</time>
+</span><br>
+
+
+        
+        <a href="/201902/11/javaweb/" target="_blank" rel="external">https://www.zhengyuyan.com/201902/11/javaweb/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.zhengyuyan.com">
+            <img src="/img/avatar.jpg" alt="郑玉燕">
+            郑玉燕
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/">javaweb</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.zhengyuyan.com/201902/11/javaweb/&title=《javaweb》 — 郑菲菲_fei&pic=https://www.zhengyuyan.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zhengyuyan.com/201902/11/javaweb/&title=《javaweb》 — 郑菲菲_fei&source=郑菲菲_fei的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.zhengyuyan.com/201902/11/javaweb/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb》 — 郑菲菲_fei&url=https://www.zhengyuyan.com/201902/11/javaweb/&via=https://www.zhengyuyan.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.zhengyuyan.com/201902/11/javaweb/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/201812/27/java修饰符/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">java修饰符</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "S3HLoEkJ1TFJVllqfhemwIga-gzGzoHsz",
+            appKey: "kJv3mIkUwGVWvnoRXGmUKL5I",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>郑玉燕 &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备16003165号-1</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.zhengyuyan.com/201902/11/javaweb/&title=《javaweb》 — 郑菲菲_fei&pic=https://www.zhengyuyan.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zhengyuyan.com/201902/11/javaweb/&title=《javaweb》 — 郑菲菲_fei&source=郑菲菲_fei的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.zhengyuyan.com/201902/11/javaweb/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaweb》 — 郑菲菲_fei&url=https://www.zhengyuyan.com/201902/11/javaweb/&via=https://www.zhengyuyan.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.zhengyuyan.com/201902/11/javaweb/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aS27DMAwFwNz/0ukBCjt8pBLA0ngVJK6l8ULl7/UqX++L6/89V/ffP/Pqm8UXBgbGYxnv2+t+yXRbvc+Vl4iBgXEC4+oEmzw62ERh3Q97xsDAwCiEfZNvMDAwMNYy6hvqpawYGBgYkyQ2DRPTJ/woF8fAwHggo151//3nr/Q3MDAwHsV4h1e9qZmGjKNdYWBgbM2oH3CTElua0Kb7wcDAOJlRWaz+t6sKcM2qIQYGxmMZvVZiL+yblPA+PA0DA2NrRlrLSo/peeobtDAxMDAOYNRDtLSt2Gs69l4TBgbGfozekdcL+L5xf/BQDAyMxzLqZa9KiDY5dtOWwGXRDQMDYztGvfTf6zmkpf9m8Q4DA+MwRumErmfG46AwGLPAwMDYmrGqidgb80rDwSDoxcDA2IJR33Sayqa/pqt/+O+BgYGxHSNtUqYp7iR8bN6JgYGxHWMyMHF/XNZbDgvGzjAwMI5hpIW2yotIg780ncbAwDiHkW4orXr1JriCUh0GBsZhjPrgRXrPN0p1GBgYZzLSpmMvmKsEoEE7EwMDY1NGr/S/dsxikvRiYGCcwKhf9aQ0TVzTYbW02YmBgbEHo37ITkpj92ulL+UyicXAwNiakR589QV6iXF89GNgYGAUxrbq3/SCv2DYAgMD43hG7+iclM9KYx8YGBgHMNKhinSxtCSXJtIYGBh7M1YdefUhjPTgXtbUxMDAeB7jDyWIslDSjtb7AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
